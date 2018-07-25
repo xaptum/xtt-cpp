@@ -1,13 +1,13 @@
 /******************************************************************************
  *
  * Copyright 2018 Xaptum, Inc.
- * 
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
- * 
+ *
  *        http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,30 +39,30 @@ void server_context::load_certificate(const std::vector<unsigned char>& certific
                                       const std::vector<unsigned char>& private_key,
                                       boost::system::error_code& ec)
 {
-    // TODO: Figure out a way to determine type(Ed25519 vs. ...) from serialized values
+    // TODO: Figure out a way to determine type(ECDSAP256 vs. ...) from serialized values
 
-    auto cert = xtt::server_certificate_context_ed25519::from_certificate_and_key(certificate, private_key);
+    auto cert = xtt::server_certificate_context_ecdsap256::from_certificate_and_key(certificate, private_key);
     if (!cert) {
         ec = boost::system::error_code(static_cast<int>(return_code::BAD_CERTIFICATE),
                                                         get_xtt_category());
         return;
     }
 
-    cert_map_[suite_spec::X25519_LRSW_ED25519_CHACHA20POLY1305_SHA512] = cert->clone();
-    cert_map_[suite_spec::X25519_LRSW_ED25519_CHACHA20POLY1305_BLAKE2B] = cert->clone();
-    cert_map_[suite_spec::X25519_LRSW_ED25519_AES256GCM_SHA512] = cert->clone();
-    cert_map_[suite_spec::X25519_LRSW_ED25519_AES256GCM_BLAKE2B] = cert->clone();
+    cert_map_[suite_spec::X25519_LRSW_ECDSAP256_CHACHA20POLY1305_SHA512] = cert->clone();
+    cert_map_[suite_spec::X25519_LRSW_ECDSAP256_CHACHA20POLY1305_BLAKE2B] = cert->clone();
+    cert_map_[suite_spec::X25519_LRSW_ECDSAP256_AES256GCM_SHA512] = cert->clone();
+    cert_map_[suite_spec::X25519_LRSW_ECDSAP256_AES256GCM_BLAKE2B] = cert->clone();
 
     ec = boost::system::error_code();
 }
 
-const boost::asio::ip::tcp::socket& 
+const boost::asio::ip::tcp::socket&
 server_context::lowest_layer() const
 {
     return socket_;
 }
 
-boost::asio::ip::tcp::socket& 
+boost::asio::ip::tcp::socket&
 server_context::lowest_layer()
 {
     return socket_;
@@ -82,4 +82,3 @@ std::experimental::optional<identity> server_context::get_clients_identity() con
 {
     return handshake_ctx_.get_clients_identity();
 }
-

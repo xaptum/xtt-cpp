@@ -1,13 +1,13 @@
 /******************************************************************************
  *
  * Copyright 2018 Xaptum, Inc.
- * 
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
- * 
+ *
  *        http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,52 +30,52 @@ std::ostream& xtt::operator<<(std::ostream& stream, const xtt::longterm_key& key
 }
 
 std::unique_ptr<longterm_key>
-longterm_key_ed25519::deserialize(const std::vector<unsigned char>& serialized)
+longterm_key_ecdsap256::deserialize(const std::vector<unsigned char>& serialized)
 {
-    if (sizeof(xtt_ed25519_pub_key) != serialized.size()) {
+    if (sizeof(xtt_ecdsap256_pub_key) != serialized.size()) {
         return {};
     }
 
-    std::unique_ptr<longterm_key> ret = std::make_unique<longterm_key_ed25519>();
+    std::unique_ptr<longterm_key> ret = std::make_unique<longterm_key_ecdsap256>();
     if (!ret)
         return {};
-    *(ret->get()) = *reinterpret_cast<const xtt_ed25519_pub_key*>(serialized.data());
+    *(ret->get()) = *reinterpret_cast<const xtt_ecdsap256_pub_key*>(serialized.data());
 
     return ret;
 }
 
 std::unique_ptr<longterm_key>
-longterm_key_ed25519::deserialize(const std::string& serialized)
+longterm_key_ecdsap256::deserialize(const std::string& serialized)
 {
-    return longterm_key_ed25519::deserialize(text_to_binary(serialized));
+    return longterm_key_ecdsap256::deserialize(text_to_binary(serialized));
 }
 
-std::size_t longterm_key_ed25519::length() const
+std::size_t longterm_key_ecdsap256::length() const
 {
-    return sizeof(xtt_ed25519_pub_key);
+    return sizeof(xtt_ecdsap256_pub_key);
 }
 
-std::unique_ptr<longterm_key> longterm_key_ed25519::clone() const
+std::unique_ptr<longterm_key> longterm_key_ecdsap256::clone() const
 {
-    return std::make_unique<longterm_key_ed25519>(*this);
+    return std::make_unique<longterm_key_ecdsap256>(*this);
 }
 
-std::vector<unsigned char> longterm_key_ed25519::serialize() const
+std::vector<unsigned char> longterm_key_ecdsap256::serialize() const
 {
-    return std::vector<unsigned char>(raw_.data, raw_.data+sizeof(xtt_ed25519_pub_key));
+    return std::vector<unsigned char>(raw_.data, raw_.data+sizeof(xtt_ecdsap256_pub_key));
 }
 
-std::string longterm_key_ed25519::serialize_to_text() const
+std::string longterm_key_ecdsap256::serialize_to_text() const
 {
-    return binary_to_text(raw_.data, sizeof(xtt_ed25519_pub_key));
+    return binary_to_text(raw_.data, sizeof(xtt_ecdsap256_pub_key));
 }
 
-const xtt_ed25519_pub_key* longterm_key_ed25519::get() const
+const xtt_ecdsap256_pub_key* longterm_key_ecdsap256::get() const
 {
     return &raw_;
 }
 
-xtt_ed25519_pub_key* longterm_key_ed25519::get()
+xtt_ecdsap256_pub_key* longterm_key_ecdsap256::get()
 {
     return &raw_;
 }
@@ -96,53 +96,53 @@ bool longterm_key::operator!=(const longterm_key& other) const
 }
 
 std::unique_ptr<longterm_private_key>
-longterm_private_key_ed25519::deserialize(const std::vector<unsigned char>& serialized)
+longterm_private_key_ecdsap256::deserialize(const std::vector<unsigned char>& serialized)
 {
-    if (sizeof(xtt_ed25519_priv_key) != serialized.size()) {
+    if (sizeof(xtt_ecdsap256_priv_key) != serialized.size()) {
         return {};
     }
 
-    auto ret = std::make_unique<longterm_private_key_ed25519>();
+    auto ret = std::make_unique<longterm_private_key_ecdsap256>();
     if (!ret)
         return {};
 
-    *(ret->get()) = *reinterpret_cast<const xtt_ed25519_priv_key*>(serialized.data());
+    *(ret->get()) = *reinterpret_cast<const xtt_ecdsap256_priv_key*>(serialized.data());
 
     return std::move(ret);
 }
 
 std::unique_ptr<longterm_private_key>
-longterm_private_key_ed25519::deserialize(const std::string& serialized)
+longterm_private_key_ecdsap256::deserialize(const std::string& serialized)
 {
-    return longterm_private_key_ed25519::deserialize(text_to_binary(serialized));
+    return longterm_private_key_ecdsap256::deserialize(text_to_binary(serialized));
 }
 
-std::size_t longterm_private_key_ed25519::length() const
+std::size_t longterm_private_key_ecdsap256::length() const
 {
-    return sizeof(xtt_ed25519_priv_key);
+    return sizeof(xtt_ecdsap256_priv_key);
 }
 
-std::unique_ptr<longterm_private_key> longterm_private_key_ed25519::clone() const
+std::unique_ptr<longterm_private_key> longterm_private_key_ecdsap256::clone() const
 {
-    return std::make_unique<longterm_private_key_ed25519>(*this);
+    return std::make_unique<longterm_private_key_ecdsap256>(*this);
 }
 
-std::vector<unsigned char> longterm_private_key_ed25519::serialize() const
+std::vector<unsigned char> longterm_private_key_ecdsap256::serialize() const
 {
-    return std::vector<unsigned char>(raw_.data, raw_.data+sizeof(xtt_ed25519_priv_key));
+    return std::vector<unsigned char>(raw_.data, raw_.data+sizeof(xtt_ecdsap256_priv_key));
 }
 
-std::string longterm_private_key_ed25519::serialize_to_text() const
+std::string longterm_private_key_ecdsap256::serialize_to_text() const
 {
-    return binary_to_text(raw_.data, sizeof(xtt_ed25519_priv_key));
+    return binary_to_text(raw_.data, sizeof(xtt_ecdsap256_priv_key));
 }
 
-const xtt_ed25519_priv_key* longterm_private_key_ed25519::get() const
+const xtt_ecdsap256_priv_key* longterm_private_key_ecdsap256::get() const
 {
     return &raw_;
 }
 
-xtt_ed25519_priv_key* longterm_private_key_ed25519::get()
+xtt_ecdsap256_priv_key* longterm_private_key_ecdsap256::get()
 {
     return &raw_;
 }
@@ -161,4 +161,3 @@ bool longterm_private_key::operator!=(const longterm_private_key& other) const
 {
     return !(*this == other);
 }
-

@@ -46,7 +46,7 @@ brew install xtt-cpp xtt-asio
 * CMake (version 3.0 or higher)
 * A C++14-compliant compiler
 * boost ASIO (version 1.66 or higher)
-* [XTT](https://github.com/xaptum/xtt) (version 0.8.0 or higher)
+* [XTT](https://github.com/xaptum/xtt) (version 0.9.0 or higher)
 
 ### Building the Library
 

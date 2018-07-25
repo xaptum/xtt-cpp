@@ -1,13 +1,13 @@
 /******************************************************************************
  *
  * Copyright 2018 Xaptum, Inc.
- * 
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
- * 
+ *
  *        http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -84,10 +84,10 @@ std::unique_ptr<pseudonym> server_handshake_context::get_clients_pseudonym() con
         return {};
 
     switch (*suite_spec_opt) {
-        case suite_spec::X25519_LRSW_ED25519_CHACHA20POLY1305_SHA512:
-        case suite_spec::X25519_LRSW_ED25519_CHACHA20POLY1305_BLAKE2B:
-        case suite_spec::X25519_LRSW_ED25519_AES256GCM_SHA512:
-        case suite_spec::X25519_LRSW_ED25519_AES256GCM_BLAKE2B:
+        case suite_spec::X25519_LRSW_ECDSAP256_CHACHA20POLY1305_SHA512:
+        case suite_spec::X25519_LRSW_ECDSAP256_CHACHA20POLY1305_BLAKE2B:
+        case suite_spec::X25519_LRSW_ECDSAP256_AES256GCM_SHA512:
+        case suite_spec::X25519_LRSW_ECDSAP256_AES256GCM_BLAKE2B:
             {
                 auto ret = std::make_unique<pseudonym_lrsw>();
                 if (XTT_RETURN_SUCCESS != xtt_get_clients_pseudonym_lrsw(ret->get(), &handshake_ctx_)) {
@@ -108,13 +108,13 @@ std::unique_ptr<longterm_key> server_handshake_context::get_clients_longterm_key
         return {};
 
     switch (*suite_spec_opt) {
-        case suite_spec::X25519_LRSW_ED25519_CHACHA20POLY1305_SHA512:
-        case suite_spec::X25519_LRSW_ED25519_CHACHA20POLY1305_BLAKE2B:
-        case suite_spec::X25519_LRSW_ED25519_AES256GCM_SHA512:
-        case suite_spec::X25519_LRSW_ED25519_AES256GCM_BLAKE2B:
+        case suite_spec::X25519_LRSW_ECDSAP256_CHACHA20POLY1305_SHA512:
+        case suite_spec::X25519_LRSW_ECDSAP256_CHACHA20POLY1305_BLAKE2B:
+        case suite_spec::X25519_LRSW_ECDSAP256_AES256GCM_SHA512:
+        case suite_spec::X25519_LRSW_ECDSAP256_AES256GCM_BLAKE2B:
             {
-                auto ret = std::make_unique<longterm_key_ed25519>();
-                if (XTT_RETURN_SUCCESS != xtt_get_clients_longterm_key_ed25519(ret->get(), &handshake_ctx_)) {
+                auto ret = std::make_unique<longterm_key_ecdsap256>();
+                if (XTT_RETURN_SUCCESS != xtt_get_clients_longterm_key_ecdsap256(ret->get(), &handshake_ctx_)) {
                     return {};
                 }
 
@@ -242,4 +242,3 @@ void swap(server_handshake_context& first, server_handshake_context& second)
     second.handshake_ctx_.base.handshake_secret = (unsigned char*)&second.handshake_ctx_.base.handshake_secret_raw;
     second.handshake_ctx_.base.prf_key = (unsigned char*)&second.handshake_ctx_.base.prf_key_raw;
 }
-
