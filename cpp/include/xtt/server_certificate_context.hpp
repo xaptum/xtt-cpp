@@ -1,13 +1,13 @@
 /******************************************************************************
  *
  * Copyright 2018 Xaptum, Inc.
- * 
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
- * 
+ *
  *        http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,8 +27,8 @@
 #include <utility>
 #include <memory>
 
-namespace xtt { class server_certificate_context_ed25519; }
-void swap(xtt::server_certificate_context_ed25519&, xtt::server_certificate_context_ed25519&);
+namespace xtt { class server_certificate_context_ecdsap256; }
+void swap(xtt::server_certificate_context_ecdsap256&, xtt::server_certificate_context_ecdsap256&);
 
 namespace xtt {
 
@@ -68,10 +68,10 @@ namespace xtt {
         virtual const struct xtt_server_certificate_context* get() const = 0;
     };
 
-    class server_certificate_context_ed25519 : public server_certificate_context {
+    class server_certificate_context_ecdsap256 : public server_certificate_context {
     public:
         /*
-         * Build a server_certificate_context_ed25519 from
+         * Build a server_certificate_context_ecdsap256 from
          *  a single byte string,
          *  in the form (certificate | private_key).
          */
@@ -80,7 +80,7 @@ namespace xtt {
         deserialize(const std::vector<unsigned char>& serialized);
 
         /*
-         * Build a server_certificate_context_ed25519 from
+         * Build a server_certificate_context_ecdsap256 from
          *  two separate byte strings,
          *  one for the certificate and the other for the private_key.
          */
@@ -90,7 +90,7 @@ namespace xtt {
                                  const std::vector<unsigned char>& private_key);
 
         /*
-         * Build a server_certificate_context_ed25519 from
+         * Build a server_certificate_context_ecdsap256 from
          *  two separate ASCII-encoded hexadecimal strings,
          *  one for the certificate and the other for the private_key.
          */
@@ -100,13 +100,13 @@ namespace xtt {
                                  const std::string& private_key);
 
     public:
-        server_certificate_context_ed25519();
+        server_certificate_context_ecdsap256();
 
-        server_certificate_context_ed25519(const server_certificate_context_ed25519&);
+        server_certificate_context_ecdsap256(const server_certificate_context_ecdsap256&);
 
-        server_certificate_context_ed25519(server_certificate_context_ed25519&& other);
+        server_certificate_context_ecdsap256(server_certificate_context_ecdsap256&& other);
 
-        server_certificate_context_ed25519& operator=(server_certificate_context_ed25519 other);
+        server_certificate_context_ecdsap256& operator=(server_certificate_context_ecdsap256 other);
 
         std::unique_ptr<server_certificate_context> clone() const final;
 
@@ -123,7 +123,7 @@ namespace xtt {
         struct xtt_server_certificate_context* get() final;
         const struct xtt_server_certificate_context* get() const final;
 
-        friend void ::swap(server_certificate_context_ed25519& first, server_certificate_context_ed25519& second);
+        friend void ::swap(server_certificate_context_ecdsap256& first, server_certificate_context_ecdsap256& second);
 
     private:
         xtt_server_certificate_context certificate_ctx_;
@@ -132,4 +132,3 @@ namespace xtt {
 }   // namespace xtt
 
 #endif
-
