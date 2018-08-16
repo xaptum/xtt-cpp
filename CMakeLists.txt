@@ -1,9 +1,10 @@
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED on)
 
 project(xtt-cpp
         VERSION "0.2.0"
         )
-
 set(XTT_CPP_VERSION ${PROJECT_VERSION})
 set(XTT_CPP_SOVERSION ${PROJECT_VERSION_MAJOR})
 
@@ -12,7 +13,6 @@ set(CMAKE_CXX_FLAGS_RELWITHSANITIZE "${CMAKE_CXX_FLAGS_RELWITHSANITIZE} -O2 -g -
 
 include(GNUInstallDirs)
 include(CTest)
-
 option(BUILD_SHARED_LIBS "Build as a shared library" ON)
 option(BUILD_STATIC_LIBS "Build as a static library" OFF)
 
