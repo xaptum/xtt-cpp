@@ -35,9 +35,6 @@
 #include <memory>
 #include <experimental/optional>
 
-namespace xtt { class server_handshake_context; }
-void swap(xtt::server_handshake_context&, xtt::server_handshake_context&);
-
 namespace xtt {
 
     class server_handshake_context {
@@ -49,10 +46,6 @@ namespace xtt {
 
     public:
         server_handshake_context(const server_handshake_context&) = delete;
-
-        server_handshake_context& operator=(server_handshake_context other);
-
-        server_handshake_context(server_handshake_context&& other);
 
         server_handshake_context(unsigned char *in_buffer,
                                  uint16_t in_buffer_size,
@@ -96,8 +89,6 @@ namespace xtt {
                                            const identity& client_id);
 
         return_code build_error_msg(io_buffer& io_buf);
-
-        friend void ::swap(server_handshake_context& first, server_handshake_context& second);
 
     private:
         xtt_server_handshake_context handshake_ctx_;
