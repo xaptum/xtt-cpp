@@ -5,7 +5,7 @@ reference implementation [here](https://github.com/xaptum/xtt):
 - `libxtt-cpp`:
   - A mostly-one-to-one C++ version of the C API provided [here](https://github.com/xaptum/xtt)
 - `libxtt-asio`:
-  - A higher-level API that builds upon `libxtt-cpp` and uses the [Boost ASIO](https://www.boost.org/doc/libs/1_67_0/doc/html/boost_asio.html)
+  - A higher-level API that builds upon `libxtt-cpp` and uses the [Boost ASIO](https://www.boost.org/doc/libs/1_66_0/doc/html/boost_asio.html)
     library to perform all necessary network I/O asynchronously
 
 # Project Status
