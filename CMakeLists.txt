@@ -73,5 +73,4 @@ endif()
 ################################################################################
 # Tests
 ################################################################################
-# Current disabled, while moving rapidly. TODO!!!
-# add_subdirectory(test)
+add_subdirectory(test)
