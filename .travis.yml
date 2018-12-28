@@ -44,10 +44,18 @@ matrix:
       env:
         - TYPE=RELEASE
         - BUILD_TYPE=Release
+    - name: "Dev build, gcc"
+      env:
+        - TYPE=DEV
+        - BUILD_TYPE=Dev
     - name: "Debug build, gcc"
       env:
         - TYPE=DEBUG
         - BUILD_TYPE=Debug
+    - name: "DevDebug build, gcc"
+      env:
+        - TYPE=DEVDEBUG
+        - BUILD_TYPE=DevDebug
     - name: "Release build, clang"
       compiler: clang
       env:

@@ -8,8 +8,10 @@ project(xtt-cpp
 set(XTT_CPP_VERSION ${PROJECT_VERSION})
 set(XTT_CPP_SOVERSION ${PROJECT_VERSION_MAJOR})
 
-add_compile_options(-std=c++14 -Werror -Wall -Wextra -Wno-missing-field-initializers)
+add_compile_options(-std=c++14 -Wall -Wextra -Wno-missing-field-initializers)
 set(CMAKE_CXX_FLAGS_RELWITHSANITIZE "${CMAKE_CXX_FLAGS_RELWITHSANITIZE} -O2 -g -fsanitize=address,undefined -fsanitize=unsigned-integer-overflow")
+set(CMAKE_CXX_FLAGS_DEV "${CMAKE_CXX_FLAGS_RELEASE} -Werror")
+set(CMAKE_CXX_FLAGS_DEVDEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Werror")
 
 include(GNUInstallDirs)
 include(CTest)
