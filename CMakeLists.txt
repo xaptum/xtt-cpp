@@ -28,7 +28,7 @@ endif()
 find_package(Threads REQUIRED QUIET)
 find_package(Boost 1.66 COMPONENTS system thread REQUIRED QUIET)
 
-find_package(xtt 0.8.0 REQUIRED QUIET)
+find_package(xtt 0.10.2 REQUIRED QUIET)
 
 add_subdirectory(cpp)
 add_subdirectory(asio)
@@ -73,5 +73,4 @@ endif()
 ################################################################################
 # Tests
 ################################################################################
-# Current disabled, while moving rapidly. TODO!!!
-# add_subdirectory(test)
+add_subdirectory(test)

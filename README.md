@@ -5,7 +5,7 @@ reference implementation [here](https://github.com/xaptum/xtt):
 - `libxtt-cpp`:
   - A mostly-one-to-one C++ version of the C API provided [here](https://github.com/xaptum/xtt)
 - `libxtt-asio`:
-  - A higher-level API that builds upon `libxtt-cpp` and uses the [Boost ASIO](https://www.boost.org/doc/libs/1_67_0/doc/html/boost_asio.html)
+  - A higher-level API that builds upon `libxtt-cpp` and uses the [Boost ASIO](https://www.boost.org/doc/libs/1_66_0/doc/html/boost_asio.html)
     library to perform all necessary network I/O asynchronously
 
 # Project Status
@@ -46,7 +46,7 @@ brew install xtt-cpp xtt-asio
 * CMake (version 3.0 or higher)
 * A C++14-compliant compiler
 * boost ASIO (version 1.66 or higher)
-* [XTT](https://github.com/xaptum/xtt) (version 0.9.0 or higher)
+* [XTT](https://github.com/xaptum/xtt) (version 0.10.2 or higher)
 
 ### Building the Library
 

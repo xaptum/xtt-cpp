@@ -41,22 +41,6 @@ server_handshake_context::server_handshake_context(unsigned char *in_buffer,
     }
 }
 
-server_handshake_context::server_handshake_context(server_handshake_context&& other)
-    : server_handshake_context(nullptr,
-                               0,
-                               nullptr,
-                               0)
-{
-    swap(*this, other);
-}
-
-server_handshake_context& server_handshake_context::operator=(server_handshake_context other)
-{
-    swap(*this, other);
-
-    return *this;
-}
-
 std::experimental::optional<version> server_handshake_context::get_version() const
 {
     xtt_version current_version;
@@ -219,26 +203,4 @@ return_code server_handshake_context::build_idserverfinished(io_buffer& io_buf,
 return_code server_handshake_context::build_error_msg(io_buffer& io_buf)
 {
     return static_cast<return_code>(xtt_server_build_error_msg(&io_buf.len, &io_buf.ptr, &handshake_ctx_));
-}
-
-void swap(server_handshake_context& first, server_handshake_context& second)
-{
-    using std::swap;
-
-    swap(first.handshake_ctx_, second.handshake_ctx_);
-
-    // Internal buffer pointers must be explicitly reset
-    first.handshake_ctx_.base.hash_out_buffer = (unsigned char*)&first.handshake_ctx_.base.hash_out_buffer_raw;
-    first.handshake_ctx_.base.inner_hash = (unsigned char*)&first.handshake_ctx_.base.inner_hash_raw;
-
-    first.handshake_ctx_.base.shared_secret_buffer = (unsigned char*)&first.handshake_ctx_.base.shared_secret_raw;
-    first.handshake_ctx_.base.handshake_secret = (unsigned char*)&first.handshake_ctx_.base.handshake_secret_raw;
-    first.handshake_ctx_.base.prf_key = (unsigned char*)&first.handshake_ctx_.base.prf_key_raw;
-
-    second.handshake_ctx_.base.hash_out_buffer = (unsigned char*)&second.handshake_ctx_.base.hash_out_buffer_raw;
-    second.handshake_ctx_.base.inner_hash = (unsigned char*)&second.handshake_ctx_.base.inner_hash_raw;
-
-    second.handshake_ctx_.base.shared_secret_buffer = (unsigned char*)&second.handshake_ctx_.base.shared_secret_raw;
-    second.handshake_ctx_.base.handshake_secret = (unsigned char*)&second.handshake_ctx_.base.handshake_secret_raw;
-    second.handshake_ctx_.base.prf_key = (unsigned char*)&second.handshake_ctx_.base.prf_key_raw;
 }
