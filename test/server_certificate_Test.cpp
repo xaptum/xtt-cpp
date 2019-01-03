@@ -10,6 +10,8 @@ void swap_moves_pointers();
 
 int main()
 {
+    xtt::initialize_crypto();
+
     swap_moves_pointers();
 }
 
