@@ -18,6 +18,10 @@
 
 #include <xtt/identity.hpp>
 
+#include <boost/asio.hpp>
+
+#include <algorithm>
+
 #include "internal/text_to_binary.hpp"
 
 #include <xtt/crypto_wrapper.h>
@@ -53,7 +57,11 @@ identity::deserialize(const std::vector<unsigned char>& serialized)
 std::experimental::optional<identity>
 identity::deserialize(const std::string& serialized_as_text)
 {
-    return identity::deserialize(text_to_binary(serialized_as_text));
+    using boost::asio::ip::make_address_v6;
+
+    auto as_bytes = make_address_v6(serialized_as_text).to_bytes();
+
+    return identity::deserialize(as_bytes.data(), as_bytes.size());
 }
 
 identity::identity()
@@ -73,7 +81,16 @@ std::vector<unsigned char> identity::serialize() const
 
 std::string identity::serialize_to_text() const
 {
-    return binary_to_text(raw_.data, sizeof(xtt_identity_type));
+    using boost::asio::ip::address_v6;
+    using boost::asio::ip::make_address_v6;
+
+    address_v6::bytes_type as_bytes;
+
+    auto beg = raw_.data;
+    auto end = raw_.data + sizeof(xtt_identity_type);
+    std::copy(beg, end, as_bytes.begin());
+
+    return make_address_v6(as_bytes).to_string();
 }
 
 bool identity::is_null() const
