@@ -1,13 +1,13 @@
 /******************************************************************************
  *
  * Copyright 2018 Xaptum, Inc.
- * 
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
- * 
+ *
  *        http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,39 +35,47 @@ std::ostream& xtt::operator<<(std::ostream& stream, const xtt::group_public_key_
 }
 
 std::unique_ptr<group_public_key_context>
-group_public_key_context_lrsw::deserialize(const std::vector<unsigned char>& serialized)
+group_public_key_context_lrsw::deserialize(const unsigned char* serialized, std::size_t serialized_length)
 {
     size_t gpk_len = sizeof(xtt_daa_group_pub_key_lrsw);
 
-    if (serialized.size() < (gpk_len + 1)) {   // ensure at least enough for GPK | basename_len
+    if (serialized_length < (gpk_len + 1)) {   // ensure at least enough for GPK | basename_len
         return {};
     }
 
-    std::vector<unsigned char>::const_iterator gpk_begin{serialized.cbegin()};
+    const unsigned char* gpk_begin = serialized;
 
     size_t basename_len = *(gpk_begin + gpk_len);
     if (basename_len > MAX_BASENAME_LENGTH) {
         return {};
     }
 
-    if (serialized.size() < (gpk_len + 1 + basename_len)) {
+    if (serialized_length < (gpk_len + 1 + basename_len)) {
         return {};
     }
-    std::vector<unsigned char>::const_iterator basename_begin{serialized.cbegin() + gpk_len + 1};
+    const unsigned char* basename_begin = serialized + gpk_len + 1;
 
-    return from_gpk_and_basename(std::vector<unsigned char>(gpk_begin, gpk_begin + gpk_len),
-                                 std::vector<unsigned char>(basename_begin, basename_begin + basename_len));
+    return from_gpk_and_basename(gpk_begin, gpk_len,
+                                 basename_begin,basename_len);
 }
 
 std::unique_ptr<group_public_key_context>
-group_public_key_context_lrsw::from_gpk_and_basename(const std::vector<unsigned char>& gpk,
-                                                     const std::vector<unsigned char>& basename)
+group_public_key_context_lrsw::deserialize(const std::vector<unsigned char>& serialized)
 {
-    if (MAX_BASENAME_LENGTH < basename.size()) {
+    return deserialize(serialized.data(), serialized.size());
+}
+
+std::unique_ptr<group_public_key_context>
+group_public_key_context_lrsw::from_gpk_and_basename(const unsigned char* gpk,
+                                                     std::size_t gpk_length,
+                                                     const unsigned char* basename,
+                                                     std::size_t basename_length)
+{
+    if (MAX_BASENAME_LENGTH < basename_length) {
         return {};
     }
 
-    if (sizeof(xtt_daa_group_pub_key_lrsw) != gpk.size()) {
+    if (sizeof(xtt_daa_group_pub_key_lrsw) != gpk_length) {
         return {};
     }
 
@@ -77,14 +85,21 @@ group_public_key_context_lrsw::from_gpk_and_basename(const std::vector<unsigned 
 
     xtt_return_code_type ctor_ret =
         xtt_initialize_group_public_key_context_lrsw(ret->get(),
-                                                     basename.data(),
-                                                     basename.size(),
-                                                     reinterpret_cast<const xtt_daa_group_pub_key_lrsw*>(gpk.data()));
+                                                     basename,
+                                                     basename_length,
+                                                     reinterpret_cast<const xtt_daa_group_pub_key_lrsw*>(gpk));
     if (XTT_RETURN_SUCCESS != ctor_ret) {
         return {};
     }
 
     return std::move(ret);
+}
+
+std::unique_ptr<group_public_key_context>
+group_public_key_context_lrsw::from_gpk_and_basename(const std::vector<unsigned char>& gpk,
+                                                     const std::vector<unsigned char>& basename)
+{
+    return from_gpk_and_basename(gpk.data(), gpk.size(), basename.data(), basename.size());
 }
 
 std::unique_ptr<group_public_key_context>

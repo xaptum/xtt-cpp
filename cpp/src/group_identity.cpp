@@ -1,13 +1,13 @@
 /******************************************************************************
  *
  * Copyright 2018 Xaptum, Inc.
- * 
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
- * 
+ *
  *        http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,16 +30,22 @@ std::ostream& xtt::operator<<(std::ostream& stream, const xtt::group_identity& i
 }
 
 std::experimental::optional<group_identity>
-group_identity::deserialize(const std::vector<unsigned char>& serialized)
+group_identity::deserialize(const unsigned char* serialized, std::size_t serialized_length)
 {
-    if (sizeof(xtt_group_id) != serialized.size()) {
+    if (sizeof(xtt_group_id) != serialized_length) {
         return {};
     }
 
     group_identity ret;
-    ret.raw_ = *reinterpret_cast<const xtt_group_id*>(serialized.data());
+    ret.raw_ = *reinterpret_cast<const xtt_group_id*>(serialized);
 
     return ret;
+}
+
+std::experimental::optional<group_identity>
+group_identity::deserialize(const std::vector<unsigned char>& serialized)
+{
+    return deserialize(serialized.data(), serialized.size());
 }
 
 std::experimental::optional<group_identity>

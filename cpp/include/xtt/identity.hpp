@@ -44,6 +44,10 @@ namespace xtt {
     public:
         static
         std::experimental::optional<identity>
+        deserialize(const unsigned char* serialized, std::size_t serialized_length);
+
+        static
+        std::experimental::optional<identity>
         deserialize(const std::vector<unsigned char>& serialized);
 
         static

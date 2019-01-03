@@ -28,21 +28,27 @@ const unsigned char server_certificate_ecdsap256_dummy[XTT_SERVER_CERTIFICATE_EC
 const xtt_ecdsap256_priv_key server_privatekey_ecdsap256_dummy = {{0}};
 
 std::unique_ptr<server_certificate_context>
-server_certificate_context_ecdsap256::deserialize(const std::vector<unsigned char>& serialized)
+server_certificate_context_ecdsap256::deserialize(const unsigned char* serialized, std::size_t serialized_length)
 {
     size_t cert_len = XTT_SERVER_CERTIFICATE_ECDSAP256_LENGTH;
     size_t key_len = sizeof(xtt_ecdsap256_priv_key);
 
-    if (serialized.size() < (cert_len + key_len)) {
+    if (serialized_length < (cert_len + key_len)) {
         return {};
     }
 
-    std::vector<unsigned char>::const_iterator cert_begin{serialized.cbegin()};
+    const unsigned char* cert_begin = serialized;
 
-    std::vector<unsigned char>::const_iterator key_begin{serialized.cbegin() + cert_len};
+    const unsigned char* key_begin = serialized + cert_len;
 
     return from_certificate_and_key(std::vector<unsigned char>(cert_begin, cert_begin + cert_len),
                                     std::vector<unsigned char>(key_begin, key_begin + key_len));
+}
+
+std::unique_ptr<server_certificate_context>
+server_certificate_context_ecdsap256::deserialize(const std::vector<unsigned char>& serialized)
+{
+    return deserialize(serialized.data(), serialized.size());
 }
 
 std::unique_ptr<server_certificate_context>
