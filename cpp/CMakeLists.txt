@@ -15,6 +15,7 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 set(XTT_CPP_SRC_FILES
+        ${CMAKE_CURRENT_LIST_DIR}/src/crypto.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/server_handshake_context.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/server_certificate_context.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/group_public_key_context.cpp

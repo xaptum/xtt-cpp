@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright 2018 Xaptum, Inc.
+ * Copyright 2019 Xaptum, Inc.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,21 +16,9 @@
  *
  *****************************************************************************/
 
-#ifndef XTT_CPP_XTTCPP_HPP
-#define XTT_CPP_XTTCPP_HPP
-#pragma once
-
 #include <xtt/crypto.hpp>
-#include <xtt/server_handshake_context.hpp>
-#include <xtt/server_cookie_context.hpp>
-#include <xtt/group_public_key_context.hpp>
-#include <xtt/server_certificate_context.hpp>
-#include <xtt/identity.hpp>
-#include <xtt/group_identity.hpp>
-#include <xtt/longterm_key.hpp>
-#include <xtt/pseudonym.hpp>
-#include <xtt/types.hpp>
 
-#endif
-
-
+int xtt::initialize_crypto()
+{
+    return xtt_crypto_initialize_crypto();
+}
