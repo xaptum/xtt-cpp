@@ -24,6 +24,7 @@
 
 #include <xtt.hpp>
 
+#include <cstring>
 #include <xtt.h>
 
 void null();

@@ -25,7 +25,9 @@
 #include "test-utils.h"
 
 #include <xtt.hpp>
+
 #include <xtt.h>
+#include <cstring>
 
 void ecdsap256_length();
 void ecdsap256_equality();

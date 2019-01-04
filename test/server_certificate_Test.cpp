@@ -26,6 +26,7 @@
 
 #include <xtt.hpp>
 
+#include <cstring>
 #include <xtt.h>
 
 void ecdsap256_clone();
