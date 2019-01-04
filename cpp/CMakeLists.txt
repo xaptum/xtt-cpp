@@ -46,6 +46,7 @@ if(BUILD_SHARED_LIBS)
         target_link_libraries(xtt-cpp
                 PUBLIC
                 xtt::xtt
+                ${Boost_LIBRARIES}
         )
 
         install(TARGETS xtt-cpp
@@ -77,6 +78,7 @@ if(BUILD_STATIC_LIBS)
         target_link_libraries(xtt-cpp_static
                 PUBLIC
                 xtt::xtt_static
+                ${Boost_LIBRARIES}
               )
 
         install(TARGETS xtt-cpp_static

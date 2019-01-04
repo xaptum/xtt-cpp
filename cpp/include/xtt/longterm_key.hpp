@@ -54,6 +54,10 @@ namespace xtt {
     public:
         static
         std::unique_ptr<longterm_key>
+        deserialize(const unsigned char* serialized, std::size_t serialized_length);
+
+        static
+        std::unique_ptr<longterm_key>
         deserialize(const std::vector<unsigned char>& serialized);
 
         static
@@ -100,6 +104,10 @@ namespace xtt {
 
     class longterm_private_key_ecdsap256 : public longterm_private_key {
     public:
+        static
+        std::unique_ptr<longterm_private_key>
+        deserialize(const unsigned char* serialized, std::size_t serialized_length);
+
         static
         std::unique_ptr<longterm_private_key>
         deserialize(const std::vector<unsigned char>& serialized);

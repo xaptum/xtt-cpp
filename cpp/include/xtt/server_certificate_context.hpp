@@ -77,6 +77,10 @@ namespace xtt {
          */
         static
         std::unique_ptr<server_certificate_context>
+        deserialize(const unsigned char* serialized, std::size_t serialized_length);
+
+        static
+        std::unique_ptr<server_certificate_context>
         deserialize(const std::vector<unsigned char>& serialized);
 
         /*

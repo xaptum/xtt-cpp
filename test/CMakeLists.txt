@@ -21,6 +21,11 @@ function(add_test_case case_file)
 
   add_executable(${case_name} ${case_file})
 
+  target_include_directories(${case_name}
+    PRIVATE
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/cpp/src/internal>
+    )
+
   if(BUILD_SHARED_LIBS)
     target_link_libraries(${case_name} PRIVATE
       xtt-asio
@@ -43,6 +48,12 @@ function(add_test_case case_file)
 endfunction()
 
 set(XTT_CPP_TEST_FILES
+  internal-text_to_binary_Test.cpp
+  group_identity_Test.cpp
+  group_public_key_context_Test.cpp
+  identity_Test.cpp
+  longterm_key_Test.cpp
+  pseudonym_Test.cpp
   server_certificate_Test.cpp
   )
 

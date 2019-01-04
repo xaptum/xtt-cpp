@@ -30,18 +30,24 @@ std::ostream& xtt::operator<<(std::ostream& stream, const xtt::longterm_key& key
 }
 
 std::unique_ptr<longterm_key>
-longterm_key_ecdsap256::deserialize(const std::vector<unsigned char>& serialized)
+longterm_key_ecdsap256::deserialize(const unsigned char* serialized, std::size_t serialized_length)
 {
-    if (sizeof(xtt_ecdsap256_pub_key) != serialized.size()) {
+    if (sizeof(xtt_ecdsap256_pub_key) != serialized_length) {
         return {};
     }
 
     std::unique_ptr<longterm_key> ret = std::make_unique<longterm_key_ecdsap256>();
     if (!ret)
         return {};
-    *(ret->get()) = *reinterpret_cast<const xtt_ecdsap256_pub_key*>(serialized.data());
+    *(ret->get()) = *reinterpret_cast<const xtt_ecdsap256_pub_key*>(serialized);
 
     return ret;
+}
+
+std::unique_ptr<longterm_key>
+longterm_key_ecdsap256::deserialize(const std::vector<unsigned char>& serialized)
+{
+    return deserialize(serialized.data(), serialized.size());
 }
 
 std::unique_ptr<longterm_key>
@@ -96,9 +102,9 @@ bool longterm_key::operator!=(const longterm_key& other) const
 }
 
 std::unique_ptr<longterm_private_key>
-longterm_private_key_ecdsap256::deserialize(const std::vector<unsigned char>& serialized)
+longterm_private_key_ecdsap256::deserialize(const unsigned char* serialized, std::size_t serialized_length)
 {
-    if (sizeof(xtt_ecdsap256_priv_key) != serialized.size()) {
+    if (sizeof(xtt_ecdsap256_priv_key) != serialized_length) {
         return {};
     }
 
@@ -106,9 +112,15 @@ longterm_private_key_ecdsap256::deserialize(const std::vector<unsigned char>& se
     if (!ret)
         return {};
 
-    *(ret->get()) = *reinterpret_cast<const xtt_ecdsap256_priv_key*>(serialized.data());
+    *(ret->get()) = *reinterpret_cast<const xtt_ecdsap256_priv_key*>(serialized);
 
     return std::move(ret);
+}
+
+std::unique_ptr<longterm_private_key>
+longterm_private_key_ecdsap256::deserialize(const std::vector<unsigned char>& serialized)
+{
+    return deserialize(serialized.data(), serialized.size());
 }
 
 std::unique_ptr<longterm_private_key>
