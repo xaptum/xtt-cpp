@@ -9,6 +9,7 @@ reference implementation [here](https://github.com/xaptum/xtt):
     library to perform all necessary network I/O asynchronously
 
 # Project Status
+[![Release](https://img.shields.io/github/release/xaptum/xtt-cpp.svg)](https://github.com/xaptum/xtt-cpp/releases)
 [![Build Status](https://travis-ci.org/xaptum/xtt-cpp.svg?branch=master)](https://travis-ci.org/xaptum/xtt-cpp)
 
 ## Installation
