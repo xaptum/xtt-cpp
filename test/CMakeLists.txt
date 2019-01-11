@@ -29,12 +29,10 @@ function(add_test_case case_file)
   if(BUILD_SHARED_LIBS)
     target_link_libraries(${case_name} PRIVATE
       xtt-asio
-      sodium
       )
   else()
     target_link_libraries(${case_name} PRIVATE
       xtt-asio_static
-      sodium
       )
   endif()
 
