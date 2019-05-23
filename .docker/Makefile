@@ -1,5 +1,5 @@
 VERSION := 0.1.1
-PREFIX  := xaptum/xtt-cpp
+PREFIX  := xaptumeng/xtt-cpp-build
 
 .DEFAULT_GOAL := all
 
