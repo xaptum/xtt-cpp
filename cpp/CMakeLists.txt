@@ -14,6 +14,8 @@
 
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
+configure_file("config.hpp.in" "include/xtt/config.hpp")
+
 set(XTT_CPP_SRC_FILES
         ${CMAKE_CURRENT_LIST_DIR}/src/crypto.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/server_handshake_context.cpp
@@ -24,7 +26,6 @@ set(XTT_CPP_SRC_FILES
         ${CMAKE_CURRENT_LIST_DIR}/src/group_identity.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/longterm_key.cpp
         )
-
 
 ################################################################################
 # Shared Libary
@@ -40,6 +41,7 @@ if(BUILD_SHARED_LIBS)
         target_include_directories(xtt-cpp
                 PUBLIC
                 $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+                $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
                 $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
         )
 
@@ -94,6 +96,7 @@ endif()
 ################################################################################
 install(FILES include/xtt.hpp DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 install(DIRECTORY include/xtt DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include/xtt DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
 ################################################################################
 # pkgconfig

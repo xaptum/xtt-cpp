@@ -29,7 +29,7 @@ std::ostream& xtt::operator<<(std::ostream& stream, const xtt::group_identity& i
     return stream << id.serialize_to_text();
 }
 
-std::experimental::optional<group_identity>
+OPTIONAL_NS::optional<group_identity>
 group_identity::deserialize(const unsigned char* serialized, std::size_t serialized_length)
 {
     if (sizeof(xtt_group_id) != serialized_length) {
@@ -42,13 +42,13 @@ group_identity::deserialize(const unsigned char* serialized, std::size_t seriali
     return ret;
 }
 
-std::experimental::optional<group_identity>
+OPTIONAL_NS::optional<group_identity>
 group_identity::deserialize(const std::vector<unsigned char>& serialized)
 {
     return deserialize(serialized.data(), serialized.size());
 }
 
-std::experimental::optional<group_identity>
+OPTIONAL_NS::optional<group_identity>
 group_identity::deserialize(const std::string& serialized)
 {
     return deserialize(text_to_binary(serialized));

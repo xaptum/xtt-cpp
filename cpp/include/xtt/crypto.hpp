@@ -21,6 +21,7 @@
 #pragma once
 
 #include <xtt/crypto_wrapper.h>
+#include <xtt/config.hpp>
 
 namespace xtt {
     int initialize_crypto();

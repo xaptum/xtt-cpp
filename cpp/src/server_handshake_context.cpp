@@ -41,7 +41,7 @@ server_handshake_context::server_handshake_context(unsigned char *in_buffer,
     }
 }
 
-std::experimental::optional<version> server_handshake_context::get_version() const
+OPTIONAL_NS::optional<version> server_handshake_context::get_version() const
 {
     xtt_version current_version;
     if (XTT_RETURN_SUCCESS != xtt_get_version(&current_version, &handshake_ctx_)) {
@@ -51,7 +51,7 @@ std::experimental::optional<version> server_handshake_context::get_version() con
     return static_cast<version>(current_version);
 }
 
-std::experimental::optional<suite_spec> server_handshake_context::get_suite_spec() const
+OPTIONAL_NS::optional<suite_spec> server_handshake_context::get_suite_spec() const
 {
     xtt_suite_spec current_suite_spec;
     if (XTT_RETURN_SUCCESS != xtt_get_suite_spec(&current_suite_spec, &handshake_ctx_)) {
@@ -109,7 +109,7 @@ std::unique_ptr<longterm_key> server_handshake_context::get_clients_longterm_key
     }
 }
 
-std::experimental::optional<identity> server_handshake_context::get_clients_identity() const
+OPTIONAL_NS::optional<identity> server_handshake_context::get_clients_identity() const
 {
     xtt_identity_type assigned_identity;
     if (XTT_RETURN_SUCCESS != xtt_get_clients_identity(&assigned_identity, &handshake_ctx_)) {

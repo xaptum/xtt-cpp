@@ -20,6 +20,8 @@
 #define XTT_CPP_TYPES_HPP
 #pragma once
 
+#include <xtt/config.hpp>
+
 #include <xtt/crypto_types.h>
 
 #include <ostream>

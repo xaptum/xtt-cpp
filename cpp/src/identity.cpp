@@ -35,7 +35,7 @@ std::ostream& xtt::operator<<(std::ostream& stream, const xtt::identity& id)
     return stream << id.serialize_to_text();
 }
 
-std::experimental::optional<identity>
+OPTIONAL_NS::optional<identity>
 identity::deserialize(const unsigned char* serialized, std::size_t serialized_length)
 {
     if (sizeof(xtt_identity_type) != serialized_length) {
@@ -48,13 +48,13 @@ identity::deserialize(const unsigned char* serialized, std::size_t serialized_le
     return ret;
 }
 
-std::experimental::optional<identity>
+OPTIONAL_NS::optional<identity>
 identity::deserialize(const std::vector<unsigned char>& serialized)
 {
     return identity::deserialize(serialized.data(), serialized.size());
 }
 
-std::experimental::optional<identity>
+OPTIONAL_NS::optional<identity>
 identity::deserialize(const std::string& serialized_as_text)
 {
     using boost::asio::ip::make_address_v6;

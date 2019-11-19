@@ -23,6 +23,7 @@
 #include <xtt/context.h>
 #include <xtt/messages.h>
 
+#include <xtt/config.hpp>
 #include <xtt/pseudonym.hpp>
 #include <xtt/longterm_key.hpp>
 #include <xtt/identity.hpp>
@@ -33,7 +34,7 @@
 #include <xtt/server_cookie_context.hpp>
 
 #include <memory>
-#include <experimental/optional>
+#include OPTIONAL_H
 
 namespace xtt {
 
@@ -52,15 +53,15 @@ namespace xtt {
                                  unsigned char *out_buffer,
                                  uint16_t out_buffer_size);
 
-        std::experimental::optional<version> get_version() const;
+        OPTIONAL_NS::optional<version> get_version() const;
 
-        std::experimental::optional<suite_spec> get_suite_spec() const;
+        OPTIONAL_NS::optional<suite_spec> get_suite_spec() const;
 
         std::unique_ptr<pseudonym> get_clients_pseudonym() const;
 
         std::unique_ptr<longterm_key> get_clients_longterm_key() const;
 
-        std::experimental::optional<identity> get_clients_identity() const;
+        OPTIONAL_NS::optional<identity> get_clients_identity() const;
 
         const struct xtt_server_handshake_context* get() const;
         struct xtt_server_handshake_context* get();
