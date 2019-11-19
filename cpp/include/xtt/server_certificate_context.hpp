@@ -22,6 +22,8 @@
 
 #include <xtt/context.h>
 
+#include <xtt/config.hpp>
+
 #include <vector>
 #include <string>
 #include <utility>

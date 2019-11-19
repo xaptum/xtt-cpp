@@ -22,6 +22,8 @@
 
 #include <xtt/context.h>
 
+#include <xtt/config.hpp>
+
 namespace xtt {
 
     class server_cookie_context {

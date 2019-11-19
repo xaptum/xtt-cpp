@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
-set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED on)
 
 project(xtt-cpp
@@ -8,7 +7,7 @@ project(xtt-cpp
 set(XTT_CPP_VERSION ${PROJECT_VERSION})
 set(XTT_CPP_SOVERSION ${PROJECT_VERSION_MAJOR})
 
-add_compile_options(-std=c++14 -Wall -Wextra -Wno-missing-field-initializers)
+add_compile_options(-Wall -Wextra -Wno-missing-field-initializers)
 set(CMAKE_CXX_FLAGS_RELWITHSANITIZE "${CMAKE_CXX_FLAGS_RELWITHSANITIZE} -O2 -g -fsanitize=address,undefined -fsanitize=unsigned-integer-overflow")
 set(CMAKE_CXX_FLAGS_DEV "${CMAKE_CXX_FLAGS_RELEASE} -Werror")
 set(CMAKE_CXX_FLAGS_DEVDEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Werror")
@@ -29,6 +28,19 @@ find_package(Threads REQUIRED QUIET)
 find_package(Boost 1.66 COMPONENTS system thread REQUIRED QUIET)
 
 find_package(xtt 0.10.2 REQUIRED QUIET)
+
+# In newer C++17 compilers, optional has been moved from std::experimental to std.
+include(CheckIncludeFileCXX)
+check_include_file_cxx("optional" HAVE_OPTIONAL)
+if(HAVE_OPTIONAL)
+  set(CMAKE_CXX_STANDARD 17)
+  set(OPTIONAL_NS "::std")
+  set(OPTIONAL_H "<optional>")
+else()
+  set(CMAKE_CXX_STANDARD 14)
+  set(OPTIONAL_NS "::std::experimental")
+  set(OPTIONAL_H "<experimental/optional>")
+endif()
 
 add_subdirectory(cpp)
 add_subdirectory(asio)

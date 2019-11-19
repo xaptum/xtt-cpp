@@ -56,7 +56,7 @@ namespace asio {
 
         std::unique_ptr<longterm_key> get_clients_longterm_key() const;
 
-        std::experimental::optional<identity> get_clients_identity() const;
+        OPTIONAL_NS::optional<identity> get_clients_identity() const;
 
         /*
          * Begin the server's end of an XTT handshake, from the very first client message.

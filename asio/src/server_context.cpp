@@ -78,7 +78,7 @@ std::unique_ptr<longterm_key> server_context::get_clients_longterm_key() const
     return handshake_ctx_.get_clients_longterm_key();
 }
 
-std::experimental::optional<identity> server_context::get_clients_identity() const
+OPTIONAL_NS::optional<identity> server_context::get_clients_identity() const
 {
     return handshake_ctx_.get_clients_identity();
 }

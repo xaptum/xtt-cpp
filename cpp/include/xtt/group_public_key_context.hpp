@@ -21,8 +21,9 @@
 #pragma once
 
 #include <xtt/context.h>
-
 #include <xtt/group_identity.hpp>
+
+#include <xtt/config.hpp>
 
 #include <vector>
 #include <memory>

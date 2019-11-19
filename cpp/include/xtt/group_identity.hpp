@@ -22,10 +22,12 @@
 
 #include <xtt/crypto_types.h>
 
+#include <xtt/config.hpp>
+
 #include <string>
 #include <vector>
 #include <functional>
-#include <experimental/optional>
+#include OPTIONAL_H
 
 namespace xtt { class group_identity; }
 namespace std {
@@ -41,15 +43,15 @@ namespace xtt {
     class group_identity {
     public:
         static
-        std::experimental::optional<group_identity>
+        OPTIONAL_NS::optional<group_identity>
         deserialize(const unsigned char* serialized, std::size_t serialized_length);
 
         static
-        std::experimental::optional<group_identity>
+        OPTIONAL_NS::optional<group_identity>
         deserialize(const std::vector<unsigned char>& serialized);
 
         static
-        std::experimental::optional<group_identity>
+        OPTIONAL_NS::optional<group_identity>
         deserialize(const std::string& serialized);
 
     public:

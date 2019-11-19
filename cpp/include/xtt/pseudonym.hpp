@@ -22,6 +22,8 @@
 
 #include <xtt/crypto_types.h>
 
+#include <xtt/config.hpp>
+
 #include <string>
 #include <vector>
 #include <memory>
