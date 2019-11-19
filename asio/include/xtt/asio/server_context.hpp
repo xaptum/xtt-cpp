@@ -24,10 +24,10 @@
 
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/io_context.hpp>
-#include <boost/asio/io_context_strand.hpp>
 #include <boost/asio/bind_executor.hpp>
 #include <boost/asio/write.hpp>
 #include <boost/asio/read.hpp>
+#include <boost/asio/strand.hpp>
 #include <boost/system/error_code.hpp>
 
 #include <memory>
@@ -169,7 +169,7 @@ namespace asio {
         server_handshake_context handshake_ctx_;
 
         boost::asio::ip::tcp::socket socket_;
-        boost::asio::io_context::strand strand_;
+        boost::asio::strand<boost::asio::executor> strand_;
 
         xtt::identity requested_client_id_;
         xtt::group_identity claimed_group_id_;
@@ -186,4 +186,3 @@ namespace asio {
 #include "server_context.inl"
 
 #endif
-
