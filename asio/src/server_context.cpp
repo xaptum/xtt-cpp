@@ -28,7 +28,7 @@ server_context::server_context(boost::asio::ip::tcp::socket tcp_socket,
       io_buf_(),
       handshake_ctx_(in_buffer_.data(), in_buffer_.size(), out_buffer_.data(), out_buffer_.size()),
       socket_(std::move(tcp_socket)),
-      strand_(socket_.get_io_service()),
+      strand_(boost::asio::make_strand(socket_.lowest_layer().get_executor())),
       cert_map_(),
       cert_(cert_map_.end()),
       cookie_ctx_(cookie_ctx)

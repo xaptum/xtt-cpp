@@ -32,7 +32,7 @@ before_script:
 
 
 script:
-  - docker run -v $(pwd):/xttcpp/ -d -t --name xttcpp xaptumeng/xtt-cpp-build:0.1.1
+  - docker run -v $(pwd):/xttcpp/ -d -t --name xttcpp xaptumeng/xtt-cpp-build:0.1.2
   - docker exec -it xttcpp bash -c "cd xttcpp && mkdir -p build"
   - docker exec -it xttcpp bash -c "cd xttcpp/build && cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_C_COMPILER=${C_COMPILER} -DCMAKE_CXX_COMPILER=${CXX_COMPILER}"
   - docker exec -it xttcpp bash -c "cd xttcpp/build && make"

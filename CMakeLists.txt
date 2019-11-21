@@ -25,7 +25,7 @@ if(NOT DEFINED BUILD_SHARED_LIBS OR NOT  "${BUILD_SHARED_LIBS}")
 endif()
 
 find_package(Threads REQUIRED QUIET)
-find_package(Boost 1.66 COMPONENTS system thread REQUIRED QUIET)
+find_package(Boost 1.70 COMPONENTS system thread REQUIRED QUIET)
 
 find_package(xtt 0.10.2 REQUIRED QUIET)
 

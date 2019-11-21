@@ -15,10 +15,10 @@ RUN apt-get -qq update \
        && rm cmake-3.11.4-Linux-x86_64.tar.gz
 
 #INSTALLS BOOST
-RUN wget http://downloads.sourceforge.net/project/boost/boost/1.66.0/boost_1_66_0.tar.gz \
-  && tar xfz boost_1_66_0.tar.gz \
-  && rm boost_1_66_0.tar.gz \
-  && cd boost_1_66_0 \
+RUN wget https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.gz \
+  && tar xfz boost_1_71_0.tar.gz \
+  && rm boost_1_71_0.tar.gz \
+  && cd boost_1_71_0 \
   && ./bootstrap.sh --prefix=/usr/local --with-libraries=system,thread \
   && ./b2 install \
   && cd ..
